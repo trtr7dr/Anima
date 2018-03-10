@@ -18,7 +18,7 @@ transition-duration: 0.7s;
 -webkit-transition-duration: 0.7s;
 -webkit-transition-timing-function: cubic-bezier(.21,.08,.24,.91);
 }
-
+```
 ## Дополнительные параметры
 ```javascript
 elem.setType('type'); // type — функция для свойства transform ( по умолчанию "translate" )
