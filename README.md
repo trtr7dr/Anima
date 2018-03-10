@@ -14,3 +14,17 @@ jQuery(window).scroll(function() {
 elem.setType('type'); // type — функция для свойства transform ( по умолчанию "translate" )
 elem.setVal('px'); // px — параметр для выбранной функции (по умолчанию "0, -50px")
 ```
+## Реальный пример
+```javascript
+var a = new Anima("#novelMain", 100);
+var b = new Anima("#articlesMain", 150);
+	
+a.setVal('0, -100px');
+b.setType('scale');
+b.setVal('1.2');
+	
+jQuery(window).scroll(function() {
+    a.signal();
+	b.signal();
+});
+```
