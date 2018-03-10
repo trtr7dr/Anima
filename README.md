@@ -9,6 +9,16 @@ jQuery(window).scroll(function() {
     elem.signal();
 });
 ```
+## CSS
+Время и типы анимации задаются правилами CSS.
+```css
+#id{
+transition-timing-function: cubic-bezier(.21,.08,.24,.91);
+transition-duration: 0.7s;
+-webkit-transition-duration: 0.7s;
+-webkit-transition-timing-function: cubic-bezier(.21,.08,.24,.91);
+}
+
 ## Дополнительные параметры
 ```javascript
 elem.setType('type'); // type — функция для свойства transform ( по умолчанию "translate" )
