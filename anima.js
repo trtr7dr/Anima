@@ -1,6 +1,11 @@
 jQuery(function () {
 	
 	function Anima(name, px){
+		
+		if (!jQuery("*").is(jQuery(name))) {
+			return false;
+		}
+		
 		this.name = name;
 		this.px = px;
 		
@@ -37,13 +42,10 @@ jQuery(function () {
 		};
 	}
 
-	var novel = new Anima("#novelMain", 0);
-	var articles = new Anima("#articlesMain", 150);
+	var test = new Anima("#id", 0);
 	
 	jQuery(window).scroll(function() {
-		novel.signal();
-		articles.signal();
+		test.signal();
 	});
-
 	
 });
