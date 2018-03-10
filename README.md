@@ -6,7 +6,7 @@ var elem = new Anima("#id", px); // px — высота, которую необ
 ```
 ```javascript
 jQuery(window).scroll(function() {
-		elem.signal();
+    elem.signal();
 });
 ```
 ## Дополнительные параметры
