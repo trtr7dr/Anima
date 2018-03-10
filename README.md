@@ -11,6 +11,6 @@ jQuery(window).scroll(function() {
 ```
 ## Дополнительные параметры
 ```javascript
-    elem.setType('type'); // type — функция для свойства transform ( по умолчанию "translate" )
-    elem.setVal('px'); // px — параметр для выбранной функции (по умолчанию "0, -50px")
+elem.setType('type'); // type — функция для свойства transform ( по умолчанию "translate" )
+elem.setVal('px'); // px — параметр для выбранной функции (по умолчанию "0, -50px")
 ```
