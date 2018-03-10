@@ -13,10 +13,10 @@ jQuery(window).scroll(function() {
 Время и типы анимации задаются правилами CSS.
 ```css
 #id{
-transition-timing-function: cubic-bezier(.21,.08,.24,.91);
-transition-duration: 0.7s;
--webkit-transition-duration: 0.7s;
--webkit-transition-timing-function: cubic-bezier(.21,.08,.24,.91);
+    transition-timing-function: cubic-bezier(.21,.08,.24,.91);
+    transition-duration: 0.7s;
+    -webkit-transition-duration: 0.7s;
+    -webkit-transition-timing-function: cubic-bezier(.21,.08,.24,.91);
 }
 ```
 ## Дополнительные параметры
