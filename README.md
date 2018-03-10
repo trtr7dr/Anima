@@ -16,15 +16,15 @@ elem.setVal('px'); // px — параметр для выбранной функ
 ```
 ## Реальный пример
 ```javascript
-var a = new Anima("#novelMain", 100);
-var b = new Anima("#articlesMain", 150);
+var a = new Anima("#one", 100); // анимация начнется если будут видны 100px от #one
+var b = new Anima("#two", 150);
 	
-a.setVal('0, -100px');
+a.setVal('0, -100px'); // transform: translate(0, -100px)
 b.setType('scale');
-b.setVal('1.2');
+b.setVal('1.2'); // scale: (1.2)
 	
 jQuery(window).scroll(function() {
     a.signal();
-	b.signal();
+    b.signal();
 });
 ```
