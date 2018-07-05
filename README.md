@@ -2,7 +2,7 @@
 Transform элементов при их появлении в области видимости.
 ## Пример
 ```javascript
-var elem = new Anima("#id", px); // px — высота, которую необходимо проскролить для начала анимации
+var elem = new Anima("#id", px);// px — высота, которую необходимо проскролить для начала анимации
 ```
 ```javascript
 jQuery(window).scroll(function() {
@@ -10,7 +10,7 @@ jQuery(window).scroll(function() {
 });
 ```
 ## CSS
-Время и типы анимации задаются правилами CSS.
+Время и типы анимации задаются правилами CSS (или с помощью .setCss(time, type) ). Пример css правил:
 ```css
 #id{
     transition-timing-function: cubic-bezier(.21,.08,.24,.91);
@@ -21,20 +21,23 @@ jQuery(window).scroll(function() {
 ```
 ## Дополнительные параметры
 ```javascript
-elem.setType('type'); // type — функция для свойства transform ( по умолчанию "translate" )
-elem.setVal('px'); // px — параметр для выбранной функции (по умолчанию "0, -50px")
+elem.setType('type');// type — функция для свойства transform ( по умолчанию "translate" )
+elem.noOpacity();// отключение плавного добавления непрозрачности
+elem.setCss();// установка дефолтных значений css (cubic-bezier(.21,.08,.24,.91) продолжительностью 0.7 сек)
+elem.setCss('0.3','ease-in');// установка собственных css правил для анимации
+elem.setVal('px');// px — параметр для выбранной функции (по умолчанию "0, -50px")
 ```
 ## Реальный пример
 ```javascript
 var a = new Anima("#one", 100); // анимация начнется если будут видны 100px от #one
 var b = new Anima("#two", 150);
 	
-a.setVal('0, -100px'); // transform: translate(0, -100px)
+a.setVal('0, -100px');// transform: translate(0, -100px)
 b.setType('scale');
-b.setVal('1.2'); // scale: (1.2)
+b.setVal('1.2');// scale: (1.2)
 	
 jQuery(window).scroll(function() {
-    a.signal();
-    b.signal();
+    a.signal();// запуск, согласно ранее установленным правилам
+    b.go();// запуск анимации сразу после загрузки страницы
 });
 ```
