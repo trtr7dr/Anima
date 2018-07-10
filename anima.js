@@ -9,9 +9,7 @@ jQuery(function () {
         this.name = name;
         this.px = px;
 
-
-
-        this.t_val = '0, -50px'; //по умолчанию сдвиг наверх на 50px
+        this.t_val = '0, -50px'; // по умолчанию сдвиг наверх на 50px
         this.t_type = 'translate';
         this.trans = false;
 
@@ -25,7 +23,6 @@ jQuery(function () {
         this.win = jQuery(window);
         this.wtop = jQuery(window).scrollTop();
 
-
         this.noOpacity = function () {
             this.opasity = false;
             this.tag.css('opacity', 1);
@@ -36,7 +33,7 @@ jQuery(function () {
         this.setType = function (type) {
             this.t_type = type;
         };
-        this.setCss = function (time, type) { //замена времени анимации и ее типа
+        this.setCss = function (time, type) { // замена времени анимации и ее типа
             if (typeof time === 'undefined') {
                 time = '0.7s';
             }
@@ -77,7 +74,7 @@ jQuery(function () {
                 }
             }
         };
-        this.go = function () { //старт после загрузки страницы
+        this.go = function () { // старт после загрузки страницы
             
             var x = this.tag;
             x.prop("shown", true);
@@ -91,14 +88,14 @@ jQuery(function () {
         };
     }
 
-    var test = new Anima("#im1", 0); //инициализация
-    //test.noOpacity(); //прозрачность не меняется
-    test.setCss(); //дефолтные стили
-    test.setTransform('translate(0px, -50px) scale(1.1)'); //смещение на 100пх вверх
-    test.go();
-
+    var test = new Anima("#id", 0); // инициализация
+    //test.noOpacity(); // прозрачность не меняется
+    test.setCss(); // дефолтные стили
+    test.setTransform('translate(0px, -50px) scale(1.1)'); //установка своих правил
+    
+    //test.go(); // запустится сразу
     jQuery(window).scroll(function () {
-        test.signal();
+        test.signal(); // test.go() тут запустится при первом скролле.
     });
 
 });
