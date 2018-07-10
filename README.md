@@ -9,6 +9,11 @@ jQuery(window).scroll(function() {
     elem.signal();
 });
 ```
+## setTransform(css)
+Для добавления нескольких свойств при анимации, используйте setTransform.
+```javascript
+    elem.setTransform('translate(0px, -50px) scale(1.1)'); //поднять и увеличить элемент
+```
 ## CSS
 Время и типы анимации задаются правилами CSS (или с помощью .setCss(time, type) ). Пример css правил:
 ```css
@@ -17,6 +22,12 @@ jQuery(window).scroll(function() {
     transition-duration: 0.7s;
     -webkit-transition-duration: 0.7s;
     -webkit-transition-timing-function: cubic-bezier(.21,.08,.24,.91);
+}
+```
+Для более плавной анимации с прозрачностью можно присвоить "opacity" в css
+```css
+#id{
+   opacity: 0;
 }
 ```
 ## Дополнительные параметры
@@ -35,9 +46,9 @@ var b = new Anima("#two", 150);
 a.setVal('0, -100px');// transform: translate(0, -100px)
 b.setType('scale');
 b.setVal('1.2');// scale: (1.2)
-	
+
+b.go();// запуск анимации сразу после загрузки страницы	
 jQuery(window).scroll(function() {
     a.signal();// запуск, согласно ранее установленным правилам
-    b.go();// запуск анимации сразу после загрузки страницы
 });
 ```
