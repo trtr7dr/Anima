@@ -1,5 +1,4 @@
 jQuery(function () {
-
     function Anima(name, px) {
 
         if (!jQuery("*").is(jQuery(name))) {
