@@ -13,6 +13,7 @@ jQuery(function () {
 
         this.t_val = '0, -50px'; //по умолчанию сдвиг наверх на 50px
         this.t_type = 'translate';
+        this.trans = false;
 
         this.tag = jQuery(this.name);
 
@@ -55,30 +56,46 @@ jQuery(function () {
             this.ttop = jQuery(this.name).offset().top;
             this.wtop = jQuery(window).scrollTop();
         };
+
+        this.setTransform = function (str) {
+            this.trans = str;
+        }
+
         this.signal = function () {
             this.refresh();
             var x = this.tag;
             if (!x.prop("shown") && this.isVisible(this.px)) {
-
                 x.prop("shown", true);
-                this.tag.css('transform', this.t_type + '(' + this.t_val + ')');
+                if(this.trans){
+                    this.tag.css('transform', this.trans);
+                }else{
+                    this.tag.css('transform', this.t_type + '(' + this.t_val + ')');
+                }
+                
                 if (this.opasity) {
                     this.tag.css('opacity', 1);
                 }
             }
         };
         this.go = function () { //старт после загрузки страницы
+            
             var x = this.tag;
             x.prop("shown", true);
-            this.tag.css('transform', this.t_type + '(' + this.t_val + ')');
+            if(this.trans){
+                this.tag.css('transform', this.trans);
+            }else{
+                this.tag.css('transform', this.t_type + '(' + this.t_val + ')');
+            }
+            this.tag.css('opacity', 1);
 
         };
     }
 
-    var test = new Anima("#id", 0); //инициализация
-    test.noOpacity(); //прозрачность не меняется
+    var test = new Anima("#im1", 0); //инициализация
+    //test.noOpacity(); //прозрачность не меняется
     test.setCss(); //дефолтные стили
-    test.setVal('0, -100px'); //смещение на 100пх вверх
+    test.setTransform('translate(0px, -50px) scale(1.1)'); //смещение на 100пх вверх
+    test.go();
 
     jQuery(window).scroll(function () {
         test.signal();
