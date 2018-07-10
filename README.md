@@ -42,7 +42,7 @@ elem.setVal('px');// px — параметр для выбранной функ�
 ```javascript
 var a = new Anima("#one", 100); // анимация начнется если будут видны 100px от #one
 var b = new Anima("#two", 150);
-var c = new Anima("#two", 0);
+var c = new Anima("#three", 0);
 	
 a.setVal('0, -100px');// transform: translate(0, -100px)
 b.setType('scale');
