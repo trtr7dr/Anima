@@ -39,11 +39,12 @@ jQuery(function () {
             if (typeof type === 'undefined') {
                 type = 'cubic-bezier(.21,.08,.24,.91)';
             }
-            this.tag.css("transition-timing-function", type);
-            this.tag.css("transition-duration", time);
-            this.tag.css("-webkit-transition-timing-function", type);
-            this.tag.css("-webkit-transition-duration", time);
-        };
+            this.tag.css({
+                "transition-timing-function", type,
+                "transition-duration", time,
+                "-webkit-transition-timing-function", type,
+                "-webkit-transition-duration", time
+            });
         this.isVisible = function () {
             return (((this.ttop + this.px) <= this.wtop + this.win.height()) && (this.ttop >= this.wtop));
         };
