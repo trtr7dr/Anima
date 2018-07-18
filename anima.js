@@ -1,5 +1,5 @@
 jQuery(function () {
-    function Anima(name, px) {
+    function Anima(name, px) { // version 1.1
 
         if (!jQuery("*").is(jQuery(name))) {
             return false;
