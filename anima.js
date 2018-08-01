@@ -40,11 +40,12 @@ jQuery(function () {
                 type = 'cubic-bezier(.21,.08,.24,.91)';
             }
             this.tag.css({
-                "transition-timing-function", type,
-                "transition-duration", time,
-                "-webkit-transition-timing-function", type,
-                "-webkit-transition-duration", time
+                "transition-timing-function": type,
+                "transition-duration": time,
+                "-webkit-transition-timing-function": type,
+                "-webkit-transition-duration": time
             });
+        }
         this.isVisible = function () {
             return (((this.ttop + this.px) <= this.wtop + this.win.height()) && (this.ttop >= this.wtop));
         };
@@ -87,15 +88,4 @@ jQuery(function () {
 
         };
     }
-
-    var test = new Anima("#id", 0); // инициализация
-    //test.noOpacity(); // прозрачность не меняется
-    test.setCss(); // дефолтные стили
-    test.setTransform('translate(0px, -50px) scale(1.1)'); //установка своих правил
-    
-    //test.go(); // запустится сразу
-    jQuery(window).scroll(function () {
-        test.signal(); // test.go() тут запустится при первом скролле.
-    });
-
 });
