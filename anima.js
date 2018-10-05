@@ -50,7 +50,7 @@ jQuery(function () {
                 "-webkit-transition-timing-function": type,
                 "-webkit-transition-duration": time
             });
-        }
+        };
         this.isVisible = function () {
             return (((this.ttop + this.px) <= this.wtop + this.win.height()) && (this.ttop >= this.wtop));
         };
