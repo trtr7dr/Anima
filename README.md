@@ -45,15 +45,21 @@ elem.setVal('px'); // px — параметр для выбранной функ
 var a = new Anima("#one", 100); // анимация начнется если будут видны 100px от #one
 var b = new Anima("#two", 150);
 var c = new Anima("#three", 0);
+var d = new Anima("#four", 0); 
 	
 a.setVal('0, -100px'); // transform: translate(0, -100px)
 b.setType('scale');
 b.setVal('1.2'); // scale: (1.2)
 c.setTransform('translate(0px, -50px) scale(1.1)');
 
+d.setCss();
+d.noOpacity();
+d.setBack(10); //скорость смещения пикселей фона (по умолчантю 15). Обратите внимание на швы фона.
+
 b.go(); // запуск анимации сразу после загрузки страницы	
 jQuery(window).scroll(function() {
     a.signal(); // запуск, согласно ранее установленным правилам
     c.go(); // как только страница начнет скроллиться
+    d.signal_back('x'); //смещать background по оси икс
 });
 ```
