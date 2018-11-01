@@ -7,15 +7,13 @@ jQuery(function () {
 
         this.name = name;
         this.px = px;
-
         this.t_val = '0, -50px'; // по умолчанию сдвиг наверх на 50px
         this.t_type = 'translate';
         this.trans = false;
-
+        
         this.tag = jQuery(this.name);
         
         this.back = 15; // смещение фона по умолчанию
-
         this.opasity = true;
         this.tag.css('opacity', 0);
 
