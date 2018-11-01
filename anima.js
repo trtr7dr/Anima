@@ -16,7 +16,6 @@ jQuery(function () {
         this.back = 15; // смещение фона по умолчанию
         this.opasity = true;
         this.tag.css('opacity', 0);
-
         this.wtop = jQuery(window).scrollTop();
         this.ttop = jQuery(this.name).offset().top;
         this.win = jQuery(window);
