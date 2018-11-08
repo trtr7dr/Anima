@@ -1,5 +1,5 @@
 # Demo
-https://gloagent.ru/anima — так странно и неправильно, что стильно и прекрасно.
+https://gloagent.ru/category/blog/web/anima.html — так странно и неправильно, что стильно и прекрасно.
 # Anima
 Transform элементов при их появлении в области видимости.
 ## Пример
