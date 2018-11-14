@@ -39,6 +39,8 @@ elem.noOpacity(); // отключение плавного добавления 
 elem.setCss(); // установка дефолтных значений css (cubic-bezier(.21,.08,.24,.91) продолжительностью 0.7 сек)
 elem.setCss('0.3','ease-in'); // установка собственных css правил для анимации
 elem.setVal('px'); // px — параметр для выбранной функции (по умолчанию "0, -50px")
+elem.setX(x); //смещение по иксу для функции anima
+elem.setY(y); //смещение по игрику для функции anima
 ```
 ## Реальный пример
 ```javascript
@@ -46,11 +48,13 @@ var a = new Anima("#one", 100); // анимация начнется если б
 var b = new Anima("#two", 150);
 var c = new Anima("#three", 0);
 var d = new Anima("#four", 0); 
+var z = new Anima("#six", 400);
 	
 a.setVal('0, -100px'); // transform: translate(0, -100px)
 b.setType('scale');
 b.setVal('1.2'); // scale: (1.2)
 c.setTransform('translate(0px, -50px) scale(1.1)');
+z.setXY(500, -100); //параметры смещения
 
 d.setCss();
 d.noOpacity();
@@ -61,5 +65,6 @@ jQuery(window).scroll(function() {
     a.signal(); // запуск, согласно ранее установленным правилам
     c.go(); // как только страница начнет скроллиться
     d.signal_back('x'); //смещать background по оси икс
+    z.anima(100); // При скролле 100 пикселей сместить элемент вправо на 500пх и вверх на 100пх
 });
 ```
