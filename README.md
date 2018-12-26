@@ -48,7 +48,7 @@ var a = new Anima("#one", 100); // анимация начнется если б
 var b = new Anima("#two", 150);
 var c = new Anima("#three", 0);
 var d = new Anima("#four", 0); 
-var z = new Anima("#six", 400);
+var z = new Anima("#six", 400); // рекомендуется настроить transition
 	
 a.setVal('0, -100px'); // transform: translate(0, -100px)
 b.setType('scale');
