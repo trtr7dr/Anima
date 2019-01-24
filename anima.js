@@ -2,6 +2,7 @@ jQuery(function () {
     function Anima(name, px) { // version 2
 
         if (!jQuery("*").is(jQuery(name))) {
+            console.error('lsprite error: element ' + name + ' not found');
             return false;
         }
 
