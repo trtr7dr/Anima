@@ -102,7 +102,12 @@ jQuery(function () {
             var res = '';
             if (type === 'char') {
                 for (var i = 0; i < ins.length; i++) {
-                    res += '<span>' + ins[i] + '</span>';
+                    res += '<span>' + ins[i];
+                    if(ins[i] === ' '){
+                        res += '</span> ';
+                    }else{
+                        res += '</span>';
+                    }
                 }
             }
             if (type === 'word') {
@@ -131,8 +136,7 @@ jQuery(function () {
             $(this.name + ' span').each(function (i, elem) {
                 function noLinearTrans(transition, i, k) {
                     if (typeof k === 'undefined') {
-                        i = 1;
-                        k = 1;
+                        k = 10;
                     }
                     var temp = transition.split('s');
                     var temp2 = temp[0].split(' ');
