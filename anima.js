@@ -56,6 +56,7 @@ jQuery(function () {
                 transition = 'all 0.6s cubic-bezier(0.4, 0, 0.6, 1) 0.2s';
             }
             this.spanTransform = transform;
+            this.tag.css('transform', transform);
             this.tag.css('transition', transition);
         };
 
@@ -207,7 +208,7 @@ jQuery(function () {
             var scrolled = window.pageYOffset || document.documentElement.scrollTop;
             var scrolled_px = 0;
             scrolled_px = (scrolled / this.back);
-            this.tag.css('background-position-' + type + scrolled_px + '%');
+            this.tag.css('background-position-' + type, scrolled_px + '%');
         };
 
         this.sspan = function (replay) { //true - с повтором
