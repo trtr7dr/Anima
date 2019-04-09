@@ -108,7 +108,7 @@ jQuery(function () {
             if (type === 'word') {
                 arr = ins.split(/\s+/g);
                 arr.forEach(function (element) {
-                    res += '<span>' + element + '</span>';
+                    res += '<span>' + element + '</span> ';
                 });
             }
             this.tag.html(res);
