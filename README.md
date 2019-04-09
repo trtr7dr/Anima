@@ -42,7 +42,8 @@ elem.setVal('px'); // px — параметр для выбранной функ
 elem.setX(x); //смещение по иксу для функции anima
 elem.setY(y); //смещение по игрику для функции anima
 elem.addSpan(type); //анимация букв/слов (char/word)
-elem.spanCss(transform, transition); //как setCss, но для анимации букв
+elem.spanCss(transform, transition, coef); //как setCss, но для анимации букв. Coef — плавность изменения времени (рекомендуемые параметры 5-10)
+elem.vCss(transform, transition); //параметры для vanima
 ```
 ## Реальный пример
 ```javascript
@@ -65,15 +66,19 @@ d.setBack(10); //скорость смещения пикселей фона (п
 var z = new Anima("#six", 400); // рекомендуется настроить transition
 z.setXY(500, -100); //параметры смещения
 
-var s = new Anima("#tester", 100); //анимация текстового блока
+var s = new Anima("#seven", 100); //анимация текстового блока
 s.addSpan('word'); //санимировать слова
 s.spanCss(); //с дефолтными стилями
+
+var v = new Anima("#id8", 300); 
+v.vCss('skewY(-10deg)', 'all 0.9s cubic-bezier(0.6, 0, 0.6, 1) 0.07s');
 	
 jQuery(window).scroll(function() {
-    a.signal(); // запуск, согласно ранее установленным правилам
+    a.signal(true); // запуск, согласно ранее установленным правилам. С параметром true — повторять при "наблюдении" элементы
     c.go(); // как только страница начнет скроллиться
     d.signal_back('x'); //смещать background по оси икс
     z.anima(100); // При скролле 100 пикселей сместить элемент вправо на 500пх и вверх на 100пх
     s.sspan(true); //повторять при "наблюдении" элементы
+    v.vanima(); //повторять параметры заданные в vCss при "наблюдении" элемента
 });
 ```
