@@ -93,12 +93,12 @@ function Anima(name, px) { // version 3
                 "-webkit-transition-timing-function:" + type + ';' +
                 "transition-duration:" + time + ';' +
                 "-webkit-transition-duration:" + time + ';'
-        );
+                );
     };
 
     this.addSpan = function (type) {
         this.noOpacity();
-        var ins = this.tag.html();
+        var ins = this.tag.innerHTML;
         var arr;
         var res = '';
         if (type === 'char') {
@@ -117,7 +117,7 @@ function Anima(name, px) { // version 3
                 res += '<span>' + element + '</span> ';
             });
         }
-        this.tag.html(res);
+        this.tag.innerHTML = res;
     };
 
     this.spanCss = function (transform, transition, coef) {
@@ -134,36 +134,40 @@ function Anima(name, px) { // version 3
     };
 
     this.spanAnimaCss = function (transform, transition, opacity, k) {
+        let elems = document.querySelectorAll('#' + this.name + ' span');
 
-        document.querySelectorAll(this.name + ' span').forEach(function (i, elem) {
-            function noLinearTrans(transition, i, k) {
-                if (typeof k === 'undefined') {
-                    k = 10;
+        let i = 1;
+        [].forEach.call(
+                elems,
+                function (el) {
+
+                    function noLinearTrans(transition, i, k) {
+                        if (typeof k === 'undefined') {
+                            k = 10;
+                        }
+                        var temp = transition.split('s');
+                        var temp2 = temp[0].split(' ');
+                        transition = temp2[0] + ' ' + ((i + 1) / k) + 's' + temp[1] + 's';
+
+                        return transition;
+                    }
+                    ;
+                    console.log(i);
+                    el.style.display = 'inline-block';
+                    el.style.transition = noLinearTrans(transition, i, k);
+                    el.style.transform = transform;
+                    el.style.opacity = opacity;
+                    i++;
                 }
-                var temp = transition.split('s');
-                var temp2 = temp[0].split(' ');
-                transition = temp2[0] + ' ' + ((i + 1) / k) + 's' + temp[1] + 's';
-
-                return transition;
-            }
-            ;
-            
-            
-            document.getElementById(this).css({
-                'display': 'inline-block',
-                'transition': noLinearTrans(transition, i, k),
-                'transform': transform,
-                'opacity': opacity
-            });
-        });
+        );
     };
 
     this.isVisible = function () {
         var vpH = window.innerHeight,
-                st =  document.body.scrollTop || document.documentElement.scrollTop,
+                st = document.body.scrollTop || document.documentElement.scrollTop,
                 y = this.tag.offsetTop,
                 elementHeight = this.tag.offsetHeight;
-        
+
         return ((y + this.px < (vpH + st)) && (y > (st - elementHeight)));
     };
 
@@ -185,7 +189,7 @@ function Anima(name, px) { // version 3
         if (typeof replay === 'undefined') {
             replay = false;
         }
-        
+
         if (this.tag.getAttribute('shown') && this.isVisible(this.px)) {
             console.log(1);
             if (!replay) {
@@ -218,9 +222,8 @@ function Anima(name, px) { // version 3
         if (typeof replay === 'undefined') {
             replay = false;
         }
-        
-        
-        if (!this.tag.getAttribute('shown') && this.isVisible(this.px)) { //видно
+        if (this.tag.getAttribute('shown') && this.isVisible(this.px)) { //видно
+            console.log(1);
             if (!replay) {
                 this.tag.setAttribute('shown', true);
             }
@@ -252,18 +255,18 @@ function Anima(name, px) { // version 3
     this.vanima = function () {
         if (this.isVisible()) {
             this.tag.style.transform = 'none';
-                this.tag.style.opacity = 1;
+            this.tag.style.opacity = 1;
         } else {
             this.tag.style.transform = this.spanTransform;
-                this.tag.style.opacity = 0;            
+            this.tag.style.opacity = 0;
         }
     };
 }
 
 var s = new Anima("tester", 300);
-s.setCss();
-s.setTransform('translate(300px, -150px) scale(2.5)');
+s.addSpan('char');
+s.spanCss(undefined, undefined, 10);
 
-window.addEventListener('scroll', function(e) {
-    s.signal(true);
+window.addEventListener('scroll', function (e) {
+    s.sspan(true);
 });
