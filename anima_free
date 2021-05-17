@@ -1,4 +1,4 @@
-function Anima(name, px) { // version 3
+function Anima(name, px) { // version 3 (without jq)
 
     if (!document.getElementById(name)) {
         console.error('Anima error: element ' + name + ' not found');
@@ -9,7 +9,6 @@ function Anima(name, px) { // version 3
     this.px = px;
     this.t_val = '0, -50px'; // по умолчанию сдвиг наверх на 50px
     this.t_type = 'translate';
-    this.trans = false;
     this.coef = undefined; //коэфицент для открисовки анимаций текста в спанах
     this.anima_prop_x = 0;
     this.anima_sign_x = '+';
@@ -23,6 +22,13 @@ function Anima(name, px) { // version 3
     this.back = 15; // смещение фона по умолчанию
     this.opasity = true;
     this.tag.style.opacity = 0;
+
+    if (!this.tag.getAttribute('trans')) {
+        this.trans = false;
+    } else {
+        this.trans = this.tag.getAttribute('trans');
+    }
+
 
     this.startPosition = function () {
         if (this.pos === undefined) {
@@ -49,7 +55,7 @@ function Anima(name, px) { // version 3
 
     this.vCss = function (transform, transition) {
         if (typeof transform === 'undefined') {
-            transform = 'skewY(-30deg)';
+            transform = (this.tag.getAttribute('trans')) ? this.tag.getAttribute('trans') : 'skewY(-30deg)';
         }
         if (typeof transition === 'undefined') {
             transition = 'all 0.6s cubic-bezier(0.4, 0, 0.6, 1) 0.2s';
@@ -111,7 +117,7 @@ function Anima(name, px) { // version 3
                 }
             }
         }
-        if (type === 'word') {
+        if (type === 'word' || !type) {
             arr = ins.split(/\s+/g);
             arr.forEach(function (element) {
                 res += '<span>' + element + '</span> ';
@@ -122,7 +128,7 @@ function Anima(name, px) { // version 3
 
     this.spanCss = function (transform, transition, coef) {
         if (typeof transform === 'undefined') {
-            transform = 'translate(0px, 300px) scale(0.9) skewY(30deg)';
+            transform = 'translate(0px, 100px) scale(0.9) skewY(30deg)';
         }
         if (typeof transition === 'undefined') {
             transition = 'all 0.6s cubic-bezier(0.4, 0, 0.6, 1) 0.2s';
@@ -140,7 +146,6 @@ function Anima(name, px) { // version 3
         [].forEach.call(
                 elems,
                 function (el) {
-
                     function noLinearTrans(transition, i, k) {
                         if (typeof k === 'undefined') {
                             k = 10;
@@ -152,17 +157,18 @@ function Anima(name, px) { // version 3
                         return transition;
                     }
                     ;
-                    console.log(i);
                     el.style.display = 'inline-block';
                     el.style.transition = noLinearTrans(transition, i, k);
                     el.style.transform = transform;
                     el.style.opacity = opacity;
+                    el.setAttribute('shown', true);
                     i++;
                 }
         );
     };
 
     this.isVisible = function () {
+
         var vpH = window.innerHeight,
                 st = document.body.scrollTop || document.documentElement.scrollTop,
                 y = this.tag.offsetTop,
@@ -189,9 +195,8 @@ function Anima(name, px) { // version 3
         if (typeof replay === 'undefined') {
             replay = false;
         }
-
         if (this.tag.getAttribute('shown') && this.isVisible(this.px)) {
-            console.log(1);
+
             if (!replay) {
                 this.tag.setAttribute('shown', true);
             }
@@ -206,7 +211,7 @@ function Anima(name, px) { // version 3
         } else {
             if (replay && !this.isVisible(this.px)) {
                 this.tag.style.transform = 'none';
-                this.tag.style.opacity = 0;
+                this.tag.style.opacity = (this.opasity) ? 0 : 1;
             }
         }
     };
@@ -215,15 +220,17 @@ function Anima(name, px) { // version 3
         var scrolled = window.pageYOffset || document.documentElement.scrollTop;
         var scrolled_px = 0;
         scrolled_px = (scrolled / this.back);
-        this.tag.css('background-position-' + type, scrolled_px + '%');
+        let s = 'background-position-' + type + ':' + scrolled_px + '%;';
+        this.tag.style.cssText=s;        
     };
 
     this.sspan = function (replay) { //true - с повтором
         if (typeof replay === 'undefined') {
             replay = false;
         }
-        if (this.tag.getAttribute('shown') && this.isVisible(this.px)) { //видно
-            console.log(1);
+
+        if (this.isVisible(this.px)) { //видно
+
             if (!replay) {
                 this.tag.setAttribute('shown', true);
             }
@@ -258,15 +265,37 @@ function Anima(name, px) { // version 3
             this.tag.style.opacity = 1;
         } else {
             this.tag.style.transform = this.spanTransform;
-            this.tag.style.opacity = 0;
+            this.tag.style.opacity = (this.opasity) ? 0 : 1;
         }
     };
 }
 
-var s = new Anima("tester", 300);
-s.addSpan('char');
-s.spanCss(undefined, undefined, 10);
+//var v = new Anima("tester", 300); 
+//v.vCss();
+//v.noOpacity();
 
-window.addEventListener('scroll', function (e) {
-    s.sspan(true);
+//var ss = new Anima("tester", 500);
+//ss.addSpan();
+//ss.spanCss(undefined, undefined, 10);
+//
+//var s = new Anima("tester", 300);
+////s.noOpacity();
+//s.setCss();
+////s.setTransform();
+
+//var a = new Anima("tester", 350);
+//a.setCss();
+//a.setXY(400, 600);
+
+
+//var d = new Anima("tester", 0);
+//d.setCss('0.1s'); //0transition-duration: 0.1s;
+//d.noOpacity();
+
+window.addEventListener('scroll', function(e) {
+//    v.vanima();
+//    ss.sspan(true);
+//    s.signal(true);
+//    a.anima(800);
+//    d.signal_back('y');
 });
